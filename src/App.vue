@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-      哈哈
+     <mainTabbar/>
   </div>
 </template>
 
 <script>
+  import mainTabbar from "components/content/MainTabbar/MainTabbar.vue";
   export default {
-    name: 'app'
+    name: 'app',
+    components:{
+      mainTabbar
+    }
   }
 </script>
 
