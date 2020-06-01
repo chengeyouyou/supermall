@@ -1,0 +1,38 @@
+<template>
+    <div class="nav-bar">
+        <div class="left">
+            <slot name="left"/>
+        </div>
+        <div class="center">
+            <slot name="center"/>
+        </div>
+        <div class="right">
+            <slot name="right"/>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="less">
+    .nav-bar{
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        display: flex;
+        font-size: 14px;
+        box-shadow: 0 1px 1px  rgba(100, 100, 100, 0.3);
+        .left, .right{
+            width: 44px;
+            height: 44px;
+        }
+        .center{
+            flex: 1;
+        }
+    }
+
+</style>
