@@ -10,7 +10,7 @@ export function getMultiData(){
   export function getProduct(type:string, page:number) {
     return request({
       url: '/home/data',
-      data: {
+      params: {
         type,
         page
       }

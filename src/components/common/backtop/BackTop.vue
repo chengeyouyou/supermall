@@ -1,18 +1,16 @@
 <template>
-  <div class="swiper-item">
-      <slot></slot>
-  </div>
+    <div class="backtop" >
+        <img src="~assets/image/common/top.png" alt="">
+    </div>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
 <style lang="less" scoped>
-    .swiper-item{     
-        display: inline-block; 
+    .backtop{
         img{
             width: 100%;
         }

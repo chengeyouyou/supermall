@@ -18,8 +18,13 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
     .nav-bar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
         height: 44px;
         line-height: 44px;
         text-align: center;

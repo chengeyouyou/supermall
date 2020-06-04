@@ -8,17 +8,56 @@
 <body>
     
 
+    <h1>高200px;距顶部100px</h1>
+    <div id="sticky-nav">这是一个tab切换栏，给sticky定位top=100px</div>
+    <p class="scroll-container">发生滚动</p>
+    <p class="scroll-container" style="background:lightgoldenrodyellow;">发生滚动</p>
 
-    <div style="width:100px;height:100px;background:#f00"></div>
 
-    <script>
+    <style>
 
-        var div = document.getElementsByTagName('div')[0];
         
-
-        div.ontouchstart = function(){
-            console.log(123);
+* {
+            margin: 0;
+            padding: 0
         }
-    </script>
+        
+        html body {
+            height: 100vh;
+            width: 100%
+        }
+        
+        h1 {
+            height: 200px;
+            position: relative;
+            background-color: lightblue;
+        }
+        
+        h1:after {
+            content: '';
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: red;
+        }
+        
+        #sticky-nav {
+            position: sticky;
+            /*position: absolute;*
+            left: 0;*/
+            top: 100px;
+            width: 100%;
+            height: 80px;
+            background-color: yellowgreen;
+        }
+        
+        .scroll-container {
+            height: 600px;
+            width: 100%;
+            background-color: lightgrey;
+        }
+    </style>
 </body>
 </html>
