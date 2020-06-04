@@ -1,7 +1,9 @@
 <template>
   <div>
-    <router-view></router-view>
-    <tabbar class="tabbar">
+    <keep-alive exclude="detail">
+        <router-view></router-view>
+    </keep-alive>
+    <tabbar class="mainTabbar">
         <tabbarItem path="/home">
             <img src="~assets/image/tabbar/home.svg" alt="首页" slot="icon">
                 <img src="~assets/image/tabbar/home_active.svg" alt="首页" slot="icon-active">
@@ -39,7 +41,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .tabbar{
+    .mainTabbar{
         height: 49px;
     }
 </style>

@@ -24,6 +24,10 @@ export default {
     probeType: {
       type: Number,
       default: 0
+    },
+    pullUpLoad:{
+      type:Boolean,
+      default:false
     }
   },
   mounted() {
@@ -31,7 +35,7 @@ export default {
       scrollY: true,
       click: true,
       probeType: this.probeType,
-      pullUpLoad: true,
+      pullUpLoad: this.pullUpLoad,
       observeDOM: true
     });
     this.bscroll.on("scroll", this._onScroll);
@@ -52,6 +56,9 @@ export default {
     },
     refresh() {
       this.bscroll && this.bscroll.refresh();
+    },
+    getScrollY(){
+      return this.bscroll ? this.bscroll.y : 0
     }
   }
 };

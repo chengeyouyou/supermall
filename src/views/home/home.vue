@@ -3,14 +3,28 @@
     <navbar class="navbar">
       <div slot="center">购物街</div>
     </navbar>
-    <scroll class="scroll" ref="scroll" @scroll="scroll" :probe-type="3" @pullingUp="pullingUp">
-      <swiper :banners="banners" />
+    <tabControl
+      :titles="Object.values(titles)"
+      @tabClick="tabClick"
+      ref="tabcontrol1"
+      v-show="isFixed"
+      class="fixTabControl tabcontrol"
+    />
+    <scroll
+      class="scroll"
+      ref="scroll"
+      @scroll="scroll"
+      :probe-type="3"
+      :pull-up-load="true"
+      @pullingUp="pullingUp"
+    >
+      <swiper :banners="banners" @swiperImageLoaded="swiperImageLoaded" />
       <recommendView :recommends="recommends" />
       <featureView />
-      <tabControl :titles="Object.values(titles)" @tabClick="tabClick" />
+      <tabControl :titles="Object.values(titles)" @tabClick="tabClick" ref="tabcontrol2" class="tabcontrol"/>
       <goodsList :goods="goods[activeTab].list" />
     </scroll>
-    <backtop ref="backtop" class="backtop" @click.native="topClick" v-if="isShow" />
+    <backtop ref="backtop" class="backtop" @click.native="topClick" v-show="isShow" />
   </div>
 </template>
 
@@ -28,8 +42,10 @@ import featureView from "./children/FeatureView.vue";
 import { getMultiData, getProduct } from "network/home.ts";
 
 import config from "common/config.ts";
+import { debounce } from "common/utils.ts";
 
 export default {
+  name:'home',
   components: {
     navbar,
     swiper,
@@ -55,7 +71,13 @@ export default {
         new: "新款",
         sell: "精选"
       },
-      isShow: false
+      isShow: false,
+      //tabcontrol的offsetTop
+      tabOffsetTop: 0,
+      //是否吸顶
+      isFixed: false,
+      //滚动的y轴距离
+      scrollY:0
     };
   },
   created() {
@@ -65,10 +87,18 @@ export default {
     this._getProduct("pop");
     this._getProduct("new");
     this._getProduct("sell");
+  },
+  mounted() {
     //监听图片刷新
-    this.$bus.$on('imgFinishLoaded',()=>{
-      this.$refs.scroll.refresh();
-    });
+    this.$bus.$on("imgFinishLoaded", debounce(this.$refs.scroll.refresh, 100));
+  },
+  activated(){
+    //先计算在滚动
+    this.$refs.scroll.refresh();
+    this.$refs.scroll.scrollTo(0, this.scrollY, 0);
+  },
+  deactivated(){
+    this.scrollY = this.$refs.scroll.getScrollY();
   },
   methods: {
     async _getMultiData() {
@@ -84,6 +114,8 @@ export default {
     },
     tabClick(index) {
       this.activeTab = Object.keys(this.titles)[index];
+      this.$refs.tabcontrol1.activeIndex = index;
+      this.$refs.tabcontrol2.activeIndex = index;
     },
     topClick() {
       this.$refs.scroll.scrollTo(0, 0);
@@ -96,15 +128,19 @@ export default {
         this.$emit("topArrive", false);
         this.isShow = false;
       }
+
+      if (-position.y >= this.tabOffsetTop && !this.isFixed) {
+        this.isFixed = true;
+      } else if (-position.y < this.tabOffsetTop && this.isFixed) {
+        this.isFixed = false;
+      }
     },
     pullingUp() {
       this._getProduct(this.activeTab);
       this.$refs.scroll.finishPullUp();
-    }
-  },
-  watch:{
-    '$store.state.counter': function(){
-      console.log(123);
+    },
+    swiperImageLoaded() {
+      this.tabOffsetTop = this.$refs.tabcontrol2.$el.offsetTop;
     }
   }
 };
@@ -116,6 +152,19 @@ export default {
   position: relative;
   height: 100vh;
   box-sizing: border-box;
+
+  .tabcontrol{
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .fixTabControl {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    width: 100%;
+  }
+
   .navbar {
     background-color: #ff5777;
     font-size: 16px;
@@ -125,7 +174,9 @@ export default {
 
   .scroll {
     height: calc(100% - 44px);
+    // height:500px;
     overflow: hidden;
+    position: relative;
   }
 
   .backtop {

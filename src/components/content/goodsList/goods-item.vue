@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <a :href="data.link">
+    <a href="javascript:;">
       <img :src="data.show.img" alt class="img" @load="imgLoad" />
       <div class="desc">
         <p class="title">{{data.title}}</p>

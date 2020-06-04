@@ -26,10 +26,10 @@ export default {
         width: 100%;
         z-index: 10;
         height: 44px;
-        line-height: 44px;
         text-align: center;
         display: flex;
         font-size: 14px;
+        line-height: 44px;
         box-shadow: 0 1px 1px  rgba(100, 100, 100, 0.3);
         .left, .right{
             width: 44px;
@@ -37,6 +37,8 @@ export default {
         }
         .center{
             flex: 1;
+            height: 44px;
+          
         }
     }
 

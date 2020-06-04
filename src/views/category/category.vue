@@ -1,18 +1,22 @@
 <template>
   <div>
+
   </div>
 </template>
 
 <script>
 
-
 export default {
-  mounted(){
+  name:'category',
+  created(){
+
+  },
+  mounted() {
+    
   },
 
-  methods:{
-  }
-}
+  methods: {}
+};
 </script>
 
 <style lang="less" scoped>

@@ -9,17 +9,17 @@
     <div class="banner" :style="moveStyle">
       <swiperItem v-if="banners.length > 1">
         <a :href="banners[banners.length - 1].link">
-          <img :src="banners[banners.length - 1].image" />
+          <img :src="banners[banners.length - 1].image || banners[banners.length - 1]" />
         </a>
       </swiperItem>
       <swiperItem v-for="(item, index) in banners" :key="index">
         <a :href="item.link">
-          <img :src="item.image" />
+          <img :src="item.image || item" @load="swiperImageLoaded" />
         </a>
       </swiperItem>
       <swiperItem v-if="banners.length > 1">
         <a :href="banners[0].link">
-          <img :src="banners[0].image" />
+          <img :src="banners[0].image || banners[0]" />
         </a>
       </swiperItem>
     </div>
@@ -68,7 +68,9 @@ export default {
       //点击位置的x坐标
       clientX: 0,
       //上一张图片的位置
-      prevMove: 0
+      prevMove: 0,
+      //判断图片是否加载完毕
+      isLoaded: false
     };
   },
   props: {
@@ -103,6 +105,12 @@ export default {
     }
   },
   methods: {
+    swiperImageLoaded() {
+      if (!this.isLoaded) {
+        this.$emit("swiperImageLoaded");
+        this.isLoaded = true;
+      }
+    },
     autoMove(delay = 0) {
       this.no = setTimeout(() => {
         if (this.direction == "left") {
