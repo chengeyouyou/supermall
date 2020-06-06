@@ -105,6 +105,9 @@ export default {
     }
   },
   methods: {
+    enabled() {
+      return this.banners.length > 1;
+    },
     swiperImageLoaded() {
       if (!this.isLoaded) {
         this.$emit("swiperImageLoaded");
@@ -112,6 +115,7 @@ export default {
       }
     },
     autoMove(delay = 0) {
+      if (!this.enabled()) return;
       this.no = setTimeout(() => {
         if (this.direction == "left") {
           this.next(() => {
@@ -125,10 +129,12 @@ export default {
       }, delay);
     },
     stopMove() {
+      if (!this.enabled()) return;
       clearInterval(this.num);
       clearTimeout(this.no);
     },
     next(notify, isBack = false) {
+      if (!this.enabled()) return;
       if (this.directionBtn && !this.isGo) return;
       this.isGo = false;
       this.num = setInterval(() => {
@@ -150,6 +156,7 @@ export default {
       }, 20);
     },
     prev(notify) {
+      if (!this.enabled()) return;
       if (this.directionBtn && !this.isGo) return;
       this.isGo = false;
       this.num = setInterval(() => {
@@ -172,6 +179,7 @@ export default {
     },
     //回弹
     restore(notify, distance, direction) {
+      if (!this.enabled()) return;
       const num = setInterval(() => {
         if (distance == 0) {
           clearInterval(num);
@@ -185,17 +193,20 @@ export default {
     },
 
     touchstart(e) {
+      if (!this.enabled()) return;
       this.stopMove();
       this.clientX = e.targetTouches[0].clientX;
     },
 
     touchmove(e) {
+      if (!this.enabled()) return;
       const moveX = e.targetTouches[0].clientX - this.clientX;
       this.move += moveX;
       this.clientX = e.targetTouches[0].clientX;
     },
 
     touchend() {
+      if (!this.enabled()) return;
       this.direction = this.move > this.prevMove ? "right" : "left";
       let distance = Math.abs(this.prevMove - this.move);
       if (this.swiperWidth * this.ratio < distance) {
@@ -232,6 +243,7 @@ export default {
   overflow: hidden;
   position: relative;
   margin-bottom: 10px;
+
   .banner {
     width: 1000%;
     .swiper-item {

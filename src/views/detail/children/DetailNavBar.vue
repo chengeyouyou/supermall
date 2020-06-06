@@ -32,7 +32,15 @@ export default {
     back() {
       this.$router.back();
     },
-    tabClick() {}
+    tabClick(index) {
+      this.$emit('tabClick', index);
+    },
+    setCurrentIndex(index){
+      this.$refs.tabcontrol.activeIndex = index;
+    },
+    getCurrentIndex(){
+      return this.$refs.tabcontrol.activeIndex;
+    }
   }
 };
 </script>
@@ -45,7 +53,6 @@ export default {
       box-sizing: border-box;
     }
   }
-
   img{
     margin-top:10px;
   }

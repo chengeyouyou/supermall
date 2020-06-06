@@ -5,7 +5,8 @@ import config from '../common/config';
 
 export function request(options:AxiosRequestConfig){
     const instance = Axios.create({
-        baseURL: config.baseURL
+        baseURL: config.baseURL,
+        timeout:5000
     });
 
     instance.interceptors.request.use(res=>{  

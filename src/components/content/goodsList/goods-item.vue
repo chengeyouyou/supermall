@@ -1,7 +1,7 @@
 <template>
   <div class="goods-item">
-    <a href="javascript:;">
-      <img :src="data.show.img" alt class="img" @load="imgLoad" />
+    <a href="javascript:;"> 
+      <img :src="imgSrc" alt class="img" @load="imgLoad" />
       <div class="desc">
         <p class="title">{{data.title}}</p>
         <span class="price">{{data.price}}</span>
@@ -19,6 +19,11 @@ export default {
       default() {
         return {};
       }
+    }
+  },
+  computed:{
+    imgSrc(){
+      return (this.data.show && this.data.show.img) || this.data.image;
     }
   },
   methods: {

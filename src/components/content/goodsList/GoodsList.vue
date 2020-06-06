@@ -1,8 +1,8 @@
 <template>
-  <div class="goods">
+  <div class="goods" v-if="goods.length != 0">
     <GoodsItem
-      v-for="item in goods"
-      :key="item.data"
+      v-for="(item, index) in goods"
+      :key="index"
       :data="item"
       class="item"
       @click.native="itemClick(item)"

@@ -38,8 +38,8 @@ export default {
       pullUpLoad: this.pullUpLoad,
       observeDOM: true
     });
-    this.bscroll.on("scroll", this._onScroll);
-    this.bscroll.on("pullingUp", this._pullingUp);
+    if(this.probeType != 0)this.bscroll.on("scroll", this._onScroll);
+    if(this.pullUpLoad)this.bscroll.on("pullingUp", this._pullingUp);
   },
   methods: {
     _onScroll(position) {

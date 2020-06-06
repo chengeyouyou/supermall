@@ -55,11 +55,11 @@ export class ShopInfo {
 }
 
 export class ParamInfo {
-    image:string;
-    infos:string[];
-    sizes:string[];
+    image: string;
+    infos: string[];
+    sizes: string[];
 
-    constructor(params:any) {
+    constructor(params: any) {
         // 注: images可能没有值(某些商品有值, 某些没有值)
         this.image = params.info.images ? params.info.images[0] : '';
         this.infos = params.info.set;
