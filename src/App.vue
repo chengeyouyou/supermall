@@ -16,6 +16,7 @@
 
 <style lang="less" scoped>
   @import 'assets/css/base';
+  @import "//at.alicdn.com/t/font_1867959_6m8mh3jd6sk.css";
 </style>
 
 

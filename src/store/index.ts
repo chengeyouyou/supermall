@@ -8,12 +8,14 @@ import actions from './actions';
 import mutations from './mutations';
 import modules from './modules';
 
+
 const store = new Vuex.Store({
     state,
     getters,
     actions,
     mutations,
-    modules
+    modules,
+    strict: process.env.NODE_ENV !== 'production'
 });
 
 

@@ -166,6 +166,7 @@ export default {
       product.desc = this.goods.desc;
       product.price = this.goods.realPrice;
       product.count = 1;
+      product.status = false;
       // console.log(product);
       this.$store.dispatch('addCart', product);
     }

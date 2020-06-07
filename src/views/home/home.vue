@@ -47,6 +47,7 @@ import { getMultiData, getProduct } from "network/home.ts";
 
 import config from "common/config.ts";
 import { imgListener,backTopListener  } from "common/mixin.ts";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "home",
@@ -84,8 +85,11 @@ export default {
       //图片加载完的标志
       swiperImageLoadedFlag: false,
       recommendImageLoaedFlag: false,
-      featureViewImageLoadedFlag: false
+      featureViewImageLoadedFlag: false,
     };
+  },
+  computed:{
+    
   },
   created() {
     //请求banner和recommend
@@ -105,6 +109,7 @@ export default {
   deactivated() {
     this.scrollY = this.$refs.scroll.getScrollY();
     this.$bus.$off("imgFinishLoaded", this.imgLoadedListener);
+ 
   },
   methods: {
     async _getMultiData() {

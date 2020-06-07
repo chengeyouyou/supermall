@@ -1,21 +1,31 @@
 <template>
   <div>
-
+   
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name:'category',
+  data(){
+    return {
+    
+    }
+  },
   created(){
 
   },
   mounted() {
     
   },
+  computed:{
 
-  methods: {}
+  },
+  methods: {
+    
+  }
 };
 </script>
 
