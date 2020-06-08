@@ -1,7 +1,7 @@
 <template>
   <div class="goods-item">
     <a href="javascript:;"> 
-      <img :src="imgSrc" alt class="img" @load="imgLoad" />
+      <img v-lazy="imgSrc" alt class="img" @load="imgLoad" />
       <div class="desc">
         <p class="title">{{data.title}}</p>
         <span class="price">{{data.price}}</span>

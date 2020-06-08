@@ -46,8 +46,8 @@ import featureView from "./children/FeatureView.vue";
 import { getMultiData, getProduct } from "network/home.ts";
 
 import config from "common/config.ts";
-import { imgListener,backTopListener  } from "common/mixin.ts";
-import { mapGetters } from 'vuex';
+import { imgListener, backTopListener } from "common/mixin.ts";
+import { mapGetters } from "vuex";
 
 export default {
   name: "home",
@@ -58,7 +58,7 @@ export default {
     tabControl,
     goodsList,
     recommendView,
-    featureView
+    featureView,
   },
   data() {
     return {
@@ -85,12 +85,10 @@ export default {
       //图片加载完的标志
       swiperImageLoadedFlag: false,
       recommendImageLoaedFlag: false,
-      featureViewImageLoadedFlag: false,
+      featureViewImageLoadedFlag: false
     };
   },
-  computed:{
-    
-  },
+  computed: {},
   created() {
     //请求banner和recommend
     this._getMultiData();
@@ -109,7 +107,6 @@ export default {
   deactivated() {
     this.scrollY = this.$refs.scroll.getScrollY();
     this.$bus.$off("imgFinishLoaded", this.imgLoadedListener);
- 
   },
   methods: {
     async _getMultiData() {
@@ -200,9 +197,13 @@ export default {
 
   .scroll {
     height: calc(100% - 44px);
-    // height:500px;
     overflow: hidden;
     position: relative;
+
+    .swiper{
+       height: 200px;
+       overflow: hidden;
+    }
   }
 
   .backtop {

@@ -51,7 +51,7 @@ export default {
     DetailParamInfo,
     DetailCommentInfo,
     DetailRecommendList,
-    DetailBottomBar
+    DetailBottomBar,
   },
   data() {
     return {
@@ -168,7 +168,9 @@ export default {
       product.count = 1;
       product.status = false;
       // console.log(product);
-      this.$store.dispatch('addCart', product);
+      this.$store.dispatch('addCart', product).then(res=>{
+        this.$toast.show(res, 2000);
+      });
     }
   }
 };
